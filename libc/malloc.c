@@ -591,13 +591,13 @@ MAX_RELEASE_CHECK_RATE   default: 4095 unless not HAVE_MMAP
 #if defined(__DEVKITPRO__)
 #include <sys/config.h>
 #include <reent.h>
+#define ABORT __builtin_trap()
 #define FOOTERS 1
 #define HAVE_MMAP 0
 #define MALLOC_ALIGNMENT ((size_t)32U)
 #define MALLOC_INSPECT_ALL 1
 #define MMAP_CLEARS 0
 #define MSPACES 1
-#define USE_BUILTIN_FFS 1
 #define USE_DL_PREFIX
 #define USE_LOCKS 1
 #define USE_SPIN_LOCKS 0
@@ -2905,7 +2905,7 @@ static size_t traverse_and_check(mstate m);
 #define treebin_at(M,i)     (&((M)->treebins[i]))
 
 /* assign tree index for size S to variable I. Use x86 asm if possible  */
-#if defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
+#if defined(__GNUC__) && __GNUC__ >= 3
 #define compute_tree_index(S, I)\
 {\
   unsigned int X = S >> TREEBIN_SHIFT;\
@@ -3008,7 +3008,7 @@ static size_t traverse_and_check(mstate m);
 
 /* index corresponding to given bit. Use x86 asm if possible */
 
-#if defined(__GNUC__) && (defined(__i386__) || defined(__x86_64__))
+#if defined(__GNUC__) && __GNUC__ >= 3
 #define compute_bit2idx(X, I)\
 {\
   unsigned int J;\
