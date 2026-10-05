@@ -67,6 +67,12 @@ New images are pushed on a near-daily basis.
 
 ## Migrating from libogc
 
+libogc portlibs are not ABI compatible with libogc2. Consult the package list for substitutes.
+
+```
+(dkp-)pacman -Sl libogc2-devkitpro
+```
+
 ### GNU Make
 
 ```diff
