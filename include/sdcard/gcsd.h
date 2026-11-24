@@ -43,9 +43,15 @@
 extern "C" {
 #endif
 
+#ifdef LIBOGC_INTERNAL
 extern DISC_INTERFACE __io_gcsda;
 extern DISC_INTERFACE __io_gcsdb;
 extern DISC_INTERFACE __io_gcsd2;
+#else
+extern DISC_INTERFACE __io_gcsda __attribute__ ((deprecated("Please use get_io_gcsda() instead.")));
+extern DISC_INTERFACE __io_gcsdb __attribute__ ((deprecated("Please use get_io_gcsdb() instead.")));
+extern DISC_INTERFACE __io_gcsd2 __attribute__ ((deprecated("Please use get_io_gcsd2() instead.")));
+#endif
 
 extern DISC_INTERFACE* get_io_gcsda (void);
 extern DISC_INTERFACE* get_io_gcsdb (void);
